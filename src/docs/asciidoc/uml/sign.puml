@@ -1,0 +1,24 @@
+@startuml
+title Зарегистрироваться в приложении
+
+actor "Владелец питомца" as guest
+participant "Backend" as Backend
+
+guest -> Backend: Запуск приложения
+guest -> Backend: Нажатие кнопки "Зарегистрироваться"
+Backend -> guest: Отображение формы регистрации
+guest -> Backend: Ввод необходимой информации
+guest -> Backend: Нажатие кнопки "Зарегистрироваться"
+Backend -> Backend: Проверка введенной информации
+
+alt Неверная информация
+  Backend-> guest: Отображение сообщения об ошибке
+  guest -> Backend: Ввод исправленной информации
+  guest -> Backend: Нажатие кнопки "Зарегистрироваться"
+  Backend -> Backend: Проверка введенной информации
+else
+  Backend -> Backend: Создание новой учетной записи
+  Backend -> guest: Авторизация пользователя
+  Backend -> guest: Отображение главного меню приложения
+end
+@enduml
