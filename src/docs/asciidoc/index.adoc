@@ -11,7 +11,7 @@
 |*Ссылки на задачи в Jira*|*Схемы*|*Макеты*
 
 |-
-|
+|-
 |https://www.figma.com/design/GEyqW35304GqHDfHaUfuly/Cats-and-Phone
 |===
 
@@ -161,7 +161,7 @@
 
 [plantuml, stakeholders_mmap, png]
 ----
-include::stakeholders_mmap.puml[]
+include::uml/stakeholders_mmap.puml[]
 ----
 
 === 5.Границы проекта и ограничения.
