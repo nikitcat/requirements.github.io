@@ -1,0 +1,18 @@
+@startuml
+actor "Владелец кошек" as user
+participant "Backend" as Backend
+
+user -> Backend: Запуск приложения
+user -> Backend: Ввод электронной почты и пароля
+user -> Backend: Нажатие кнопки "Войти"
+
+alt Неверные данные
+  Backend-> user: Отображение сообщения об ошибке
+  user -> Backend: Ввод электронной почты и пароля
+  user -> Backend: Нажатие кнопки "Войти"
+else
+  Backend-> Backend: Проверка введенных данных
+  Backend-> user: Авторизация пользователя
+  Backend-> user: Отображение главного меню приложения
+end
+@enduml

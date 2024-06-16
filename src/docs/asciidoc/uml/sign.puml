@@ -1,7 +1,7 @@
 @startuml
 title Зарегистрироваться в приложении
 
-actor "Владелец питомца" as guest
+actor "Владелец кошек" as guest
 participant "Backend" as Backend
 
 guest -> Backend: Запуск приложения
@@ -19,6 +19,6 @@ alt Неверная информация
 else
   Backend -> Backend: Создание новой учетной записи
   Backend -> guest: Авторизация пользователя
-  Backend -> guest: Отображение главного меню приложения
+  Backend -> guest: Отображение ленты новостей
 end
 @enduml
