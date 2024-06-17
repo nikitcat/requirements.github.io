@@ -1,18 +1,34 @@
 @startuml
-actor "Владелец кошек" as user
-participant "Backend" as Backend
+actor "Владелец кошек" as User
+box "CatsPost"
+    participant "UI" as UI
+end box
+participant "API-Gateway" as Gateway
+box "Catsauth Service"
+participant "REST API" as REST
+end box
+database "database" as db
 
-user -> Backend: Запуск приложения
-user -> Backend: Ввод электронной почты и пароля
-user -> Backend: Нажатие кнопки "Войти"
 
+
+group Use Case 1: Регистрация нового пользователя
+activate User
+activate UI
+User <- UI:Приложение запрашивает электронную почту и пароль
+User <- UI:Приложение запрашивает электронную почту и пароль
+User <- User:Владелец кошек вводит e-mail и password
+User -> UI:Владелец кошек нажимает кнопку "Сontinue"
+activate Gateway
+activate REST
+UI -> Gateway:Владелец кошек нажимает кнопку "Continue"
+Gateway -> REST:Отправить данные на проверку
+REST -> REST:Валидация данных
 alt Неверные данные
-  Backend-> user: Отображение сообщения об ошибке
-  user -> Backend: Ввод электронной почты и пароля
-  user -> Backend: Нажатие кнопки "Войти"
-else
-  Backend-> Backend: Проверка введенных данных
-  Backend-> user: Авторизация пользователя
-  Backend-> user: Отображение главного меню приложения
+activate db
+REST -> db:Проверка введенных данных
+REST --> Gateway:Данные невалидны
+Gateway --> UI:Данные невалидны
+UI --> User:Отображение сообщения об ошибке невалидных данных
 end
+end group
 @enduml
