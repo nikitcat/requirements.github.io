@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+package "Регистрация нового пользователя" as usecase {
+  Actor "Владелец кошек" as User
+  [Backend] as Backend
+  rectangle CatsPost {
+    usecase "Регистрация нового пользователя" as Sign
+    usecase "Ввод nikcname e-mail password" as In
+    usecase "Авторизация пользователя" as Auth
+    usecase "Работа с лентой" as Feed
+    usecase "Лайк фотографий" as like
+    usecase "Вход в профиль" as Profile
+    usecase "Поиск фото по тегам" as Serch
+    usecase "Подписка на других пользователей" as Follow
+    usecase "Добавить/редактировать фото в профиле" as photoAddPhoto
+    usecase "Добавить фото к профилю" as photoAddPhotoProfile
+    usecase "Удаление фото" as deletePhoto
+  }
+User -- Sign
+Sign ..> In :include
+}
+@enduml
