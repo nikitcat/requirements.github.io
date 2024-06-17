@@ -1,24 +1,37 @@
 @startuml
-title Зарегистрироваться в приложении
+actor "Владелец кошек" as User
+box "CatsPost"
+    participant "UI" as UI
+end box
+participant "API-Gateway" as Gateway
+box "Catsauth Service"
+participant "REST API" as REST
+end box
+database "database" as db
 
-actor "Владелец кошек" as guest
-participant "Backend" as Backend
 
-guest -> Backend: Запуск приложения
-guest -> Backend: Нажатие кнопки "Зарегистрироваться"
-Backend -> guest: Отображение формы регистрации
-guest -> Backend: Ввод необходимой информации
-guest -> Backend: Нажатие кнопки "Зарегистрироваться"
-Backend -> Backend: Проверка введенной информации
 
-alt Неверная информация
-  Backend-> guest: Отображение сообщения об ошибке
-  guest -> Backend: Ввод исправленной информации
-  guest -> Backend: Нажатие кнопки "Зарегистрироваться"
-  Backend -> Backend: Проверка введенной информации
-else
-  Backend -> Backend: Создание новой учетной записи
-  Backend -> guest: Авторизация пользователя
-  Backend -> guest: Отображение ленты новостей
+group Use Case 1: Регистрация нового пользователя
+activate User
+activate UI
+User -> UI: Владелец кошек нажимает кнопку "Зарегистрироваться"
+User <-- UI: Система отображает форму регистрации
+User -> User: Владелец кошек вводит Nickname, email, password
+activate Gateway
+activate REST
+User -> UI: Владелец кошек нажимает кнопку "Continue"
+UI -> Gateway: Владелец кошек нажимает кнопку "Continue"
+Gateway -> REST: Отправить данные на проверку
+REST -> REST: Валидация данных
+activate db
+alt Неверные данные
+REST --> Gateway: Ответ с ошибкой
+Gateway --> UI: Ответ с ошибкой
+UI --> User: Показать данные об ошибке
 end
+REST -> db: Сервис создает новую учетную запись
+REST -> Gateway: Ответ об успешном сохранении пользователя
+Gateway -> UI: Ответ об успешном сохранении пользователя
+UI -> User: Ответ об успешном сохранении пользователя
+end group
 @enduml
