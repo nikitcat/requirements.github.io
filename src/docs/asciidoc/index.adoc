@@ -530,7 +530,7 @@ include::uml/use_case.puml[]
 ==== 1.4 Диаграмма компонентов
 === 2.Модель данных
 
-xref:draw/ER-диаграмма CatsPost.drawio.png[ER Auth.drawio]
+image::draw/ER-диаграмма CatsPost.drawio.png[ER Auth.drawio]
 
 === 3.API Описание контрактов
 === 4.Кейсы для тестирования бэка
