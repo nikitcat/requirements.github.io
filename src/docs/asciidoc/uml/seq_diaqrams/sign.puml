@@ -7,7 +7,6 @@ participant "API-Gateway" as Gateway
 box "Catsauth Service"
 participant "REST API" as REST
 end box
-database "database" as db
 
 
 
@@ -24,15 +23,13 @@ UI -> Gateway: Владелец кошек нажимает кнопку "Contin
 Gateway -> REST: Отправить данные на проверку
 REST -> REST: Валидация данных
 alt Неверные данные
-activate db
-REST -> db: Проверка на уникальность
+REST -> REST: Проверка на уникальность
 REST --> Gateway: Ответ с ошибкой
 Gateway --> UI: Ответ с ошибкой
 UI --> User: Показать данные об ошибке
 end
-REST -> db: Сохранить новую учетную запись
+REST -> REST: Сохранить новую учетную запись
 REST -> Gateway: Ответ об успешном сохранении пользователя
-deactivate db
 Gateway -> UI: Ответ об успешном сохранении пользователя
 UI -> User: Ответ об успешном сохранении пользователя
 deactivate User
