@@ -530,7 +530,7 @@ include::uml/use_case.puml[]
 ==== 1.4 Диаграмма компонентов
 === 2.Модель данных
 
-include::ER Auth.drawio.xml[]
+(xref:draw/ER Auth.drawio.xml[ER Auth.drawio])
 
 === 3.API Описание контрактов
 === 4.Кейсы для тестирования бэка
