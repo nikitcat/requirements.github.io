@@ -530,8 +530,7 @@ include::uml/use_case.puml[]
 ==== 1.4 Диаграмма компонентов
 === 2.Модель данных
 
-ER диаграмма в Miro
-https://miro.com/welcomeonboard/cEhiVjJzSnNiVm5veWR2S3o0UldaVHd0VG1nUTBoNW1KbzRqM1BVOFU0Qm9nYW1CZ1RObzAwODQxN09UeTFucXwzNDU4NzY0NTkyNzg3NjY2OTExfDI=?share_link_id=820552559448
+image::draw/ER-диаграмма CatsPost.drawio (1).png[]
 
 === 3.API Описание контрактов
 === 4.Кейсы для тестирования бэка
