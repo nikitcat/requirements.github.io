@@ -1,0 +1,135 @@
+==== Метод: Авторизация пользователя
+
+*1. Название метода:*
+
+- *Название метода:* Обновление JWT токена
+
+- *URL и Endpoint:* POST https://cats-mobile.ru/user/refresh
+
+*2. Общее описание метода:*
+
+- *Что это:* Метод для обновления просроченного JWT токена.
+
+- *Для чего мы это делаем:* Для получения нового JWT токена, используя refresh_token.
+
+*Роли пользователей:* Аутентифицированные пользователи.
+
+*3. Алгоритм работы:*
+
+- *Кто делает запрос:* Гость.
+
+- *Кто обрабатывает:* Сервис аутентификации (Catsauth Service).
+
+- *К каким таблицам БД обращение:*
+
+ - Таблица tokens для проверки refresh_token.
+ - Таблица tokens для обновления записи refresh_token.
+
+*Шаги:*
+
+1) *Гость:* Отправляет запрос с refresh_token.
+
+2) *API Gateway:* Перенаправляет запрос в Catsauth Service.
+
+3) *Catsauth Service:*
+
+- Проверяет refresh_token.
+
+- Генерирует новый JWT токен.
+
+- Обновляет запись refresh_token в таблице tokens.
+
+4) *Catsauth Service:* Возвращает новый JWT токен и обновленный refresh_token.
+
+5) *API Gateway:* Возвращает результат клиенту.
+
+*4. Пример запроса:*
+
+- *Метод:* POST
+
+- *URL:* https://cats-mobile.ru/user/refresh
+
+- *query-параметры:* нет
+
+- *Headers:* 
+- Content-Type: application/json
+- Authorization: Bearer <старый_access_token>
+
+- *Требования к авторизации:* Нет (гость)
+
+*4.2. Тело запроса:*
+[source, json]
+----
+{
+  "refreshToken": "dGhpcyByZWZyZXNoIHRva2VuCg=="
+}
+----
+*5. Пример ответа:*
+
+- *HTTP-200:* Успешное обновление токена.
+
+*Тело ответа:*
+[source,json]
+----
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI...",
+  "refreshToken": "dGhpcyByZWZyZXNoIHRva2VuCg=="
+}
+----
+
+- *HTTP-401:* Неправильный или истекший refresh_token.
+*Тело ответа:*
+[source,json]
+----
+{
+  "error": "Invalid or expired refresh token."
+}
+----
+
+*Таблицы маппинга данных JSON и БД*
+
+*6. Входные параметры POST https://cats-mobile.ru/user/refresh*
+|===
+|*Название параметра на русском*|*Название параметра в JSON*|*Тип данных в JSON*|*Название параметра в БД*|*Тип данных в БД*|*Описание и алгоритм обработки данных*
+
+|Refresh-токен
+|refreshToken
+|string
+|tokens.refresh_token
+|VARCHAR(255)
+|Поиск и проверка refresh_token
+|===
+
+*6.1 Выходные параметры POST https://cats-mobile.ru/user/refresh*
+
+|===
+|*Название параметра на русском*|*Название параметра в JSON*|*Тип данных в JSON*|*Название параметра в БД*|*Тип данных в БД*|*Описание и алгоритм обработки данных*
+
+|JWT токен
+|accessToken
+|string
+|-
+|-
+|Генерируется и возвращается
+
+|Refresh-токен
+|refreshToken
+|string
+|tokens.refresh_token
+|VARCHAR(255)
+|Обновляется в БД и возвращается
+|===
+
+*Алгоритм обработки данных*
+
+*Обновление JWT токена:*
+
+1. Найти запись по refreshToken в таблице tokens.
+
+2. Проверить, не истекло ли expire_at.
+
+3. Если валиден, сгенерировать новый accessToken и обновить refreshToken
+
+4. Вернуть новый accessToken и refreshToken клиенту.
+
+xref:../../index.adoc[Назад]
