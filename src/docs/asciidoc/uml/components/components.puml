@@ -1,0 +1,27 @@
+@startuml
+
+component "Пользователь" as User
+component "Catspost Mobile" as CatspostApp
+component "API Gateway" as APIGateway
+component "Cats Auth" as CatsAuth
+component "Cats Images" as CatsImages
+component "Cats Feeds" as CatsFeeds
+component "Cats Subscribers" as CatsSubscribers
+database "Auth" as auth
+database "Images" as images
+database "Feeds" as feeds
+database "Subscribers" as sub
+database "MinIO" as MinIO
+
+User -> CatspostApp
+CatspostApp -> APIGateway
+APIGateway --> CatsAuth
+APIGateway --> CatsImages
+APIGateway --> CatsFeeds
+APIGateway --> CatsSubscribers
+CatsImages --> MinIO
+CatsImages --> images
+CatsFeeds --> feeds
+CatsAuth --> auth
+CatsSubscribers --> sub
+@enduml

@@ -536,9 +536,29 @@ include::uml/use_case.puml[]
 - xref:uml/CatsImages.adoc[Сats Images Service]
 - xref:uml/CatsFeeds.adoc[Сats Feeds Service]
 
-==== 1.3 Диаграммы активности
-==== 1.4 Диаграмма компонентов
+==== 1.3 Диаграмма компонентов
+
+*Компонент Cats Auth:* управляет регистрацией и аутентификацией пользователей, компонент.
+
+*Компонент Cats Images:* управляет загрузкой, хранением, удалением фото.
+
+*Компонент Cats Feeds:* управляет публикацией постов, лайков к постам и комментариям.
+
+*Компонент Cats Feeds:* управляет подписками пользователей.
+
+[plantuml, components, png]
+----
+include::uml/components/components.puml[]
+----
+
 === 2.Модель данных
+
+*ERD диаграмма*
+[plantuml, db, png]
+----
+include::uml/db/db.puml[]
+----
+
 === 3.API Описание контрактов
 
 ==== 3.1 Сats Auth Service
