@@ -18,7 +18,7 @@
 
 === 1.Предыстория и краткое изложение сути проекта.
 
-Так как спрос на фото представителей кошачьих в сети Интернет только растет, было принято решение разработать мобильное приложения в которым пользователи смогут делится фото питомцев между друг другом, основной аудиторией в виде питомца выбраны представители кошачьих
+Cпрос на фото котиков в сети Интернет только растет, было принято решение разработать мобильное приложения в которым пользователи смогут делится фото питомцев между друг другом, основной аудиторией в виде питомца выбраны представители кошачьих
 
 '''
 
@@ -531,22 +531,56 @@ include::uml/use_case.puml[]
 == Спецификация бэкенда
 === 1.Логика работы системы
 ==== 1.2 Диаграммы последовательности
+
+- xref:uml/CatsAuth.adoc[Сats Auth Service]
+- xref:uml/CatsImages.adoc[Сats Images Service]
+- xref:uml/CatsFeeds.adoc[Сats Feeds Service]
+
 ==== 1.3 Диаграммы активности
 ==== 1.4 Диаграмма компонентов
 === 2.Модель данных
 === 3.API Описание контрактов
 
-==== 3.1 Сatsauth Service
+==== 3.1 Сats Auth Service
 
-- Метод: Регистрация пользователя xref:cats_api/authapi/signup.adoc[POST user/signup]
+- Метод: Регистрация пользователя xref:cats_api/authapi/signup.adoc[POST auth/signup]
+- Метод: Авторизация пользователя xref:cats_api/authapi/login.adoc[POST auth/login]
+- Метод: Обновление JWT токена xref:cats_api/authapi/refresh.adoc[POST auth/refresh]
+- Метод: Выход из системы xref:cats_api/authapi/logout.adoc[DELETE auth/logout]
 
-- Метод: Авторизация пользователя xref:cats_api/authapi/login.adoc[POST user/login]
+==== 3.2 Сats Images Service
 
-- Метод: Обновление JWT токена xref:cats_api/authapi/refresh.adoc[POST user/refresh]
+- Метод: Загрузка фото пользователя xref:cats_api/imagesapi/upload.adoc[POST images/upload]
+- Метод: Получение списка изображений xref:cats_api/imagesapi/getallimages.adoc[GET /images]
+- Метод: Получение фото по идентификатору xref:cats_api/imagesapi/getimages.adoc[GET /images/{imageId}]
+- Метод: Удаление фото по идентификатору xref:cats_api/imagesapi/deleteimages.adoc[DELETE /images/{imageId}]
 
-- Метод: Выход из системы xref:cats_api/authapi/logout.adoc[DELETE user/logout]
+==== 3.3 Сats Feeds Service
+
+- Метод: Создания поста xref:cats_api/feedsapi/posts/postsapi.adoc[POST /posts]
+- Метод: Получение ленты постов xref:cats_api/feedsapi/posts/getposts.adoc[GET /posts]
+- Метод: Получение постов по идентификатору пользователя xref:cats_api/feedsapi/posts/getpostsuser.adoc[GET /posts/{userId}]
+- Метод: Получение поста по идентификатору поста xref:cats_api/feedsapi/posts/getpostspostid.adoc[GET /posts/{postId}]
+- Метод: Редактирование поста xref:cats_api/feedsapi/posts/patchposts.adoc[PATCH /posts/{postId}]
+- Метод: Удаление поста xref:cats_api/feedsapi/posts/deleteposts.adoc[DELETE /posts/{postId}]
+
+'''
+
+- Метод: Добавление комментария xref:cats_api/feedsapi/comments/addcomments.adoc[POST /posts/{postId}/comment]
+- Метод: Получение комментариев поста xref:cats_api/feedsapi/comments/getcomments.adoc[GET /posts/{postId}/comment]
+- Метод: Редактирование комментария xref:cats_api/feedsapi/comments/patchcomments.adoc[PATCH /posts/{postId}/comment/{commentId}]
+- Метод: Удаление комментария xref:cats_api/feedsapi/comments/deletecomment.adoc[DELETE /posts/{postId}/comment/{commentId}]
+
+'''
+
+- Метод: Добавление лайка к посту xref:cats_api/feedsapi/likes/likeposts.adoc[POST /posts/{postId}/like]
+- Метод: Получения лайков поста xref:cats_api/feedsapi/likes/getlikes.adoc[GET /posts/{postId}/like]
+- Метод: Получения лайков пользователя xref:cats_api/feedsapi/likes/getlikesuser.adoc[GET /posts/{userId}/like]
+- Метод: Удалить лайк с поста xref:cats_api/feedsapi/likes/likedelete.adoc[DELETE /posts/{postId}/like]
 
 === 4.Кейсы для тестирования бэка
+
+Будет заполнятся по ходу реализации приложения
 
 == UI-логика. Документация фронтэнда
 === 1.Навигация по экранам

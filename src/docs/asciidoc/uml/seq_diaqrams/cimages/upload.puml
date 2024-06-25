@@ -1,0 +1,55 @@
+@startuml
+actor "Пользователь" as User
+box "CatsPost"
+    participant "UI" as UI
+end box
+participant "API-Gateway" as Gateway
+box "Catsaimages Service"
+participant "REST API" as REST
+end box
+database "PostgreSQL" as PostgreSQL
+database "MinIO" as MinIO
+
+group Use Case 1: Загрузка фото пользователем
+activate User
+activate UI
+User <-- UI: Приложение отображает экран загрузки фото
+activate Gateway
+activate REST
+activate PostgreSQL
+activate MinIO
+User <- User: Пользователь выбирает фото из галерерии
+User -> UI: Пользователь нажимает кнопку Download photo
+UI -> Gateway: Пользователь нажимает кнопку Download photo
+Gateway -> REST: Отправить данные на проверку POST  /images/upload
+REST -> REST: Проверяет формат и размер файла
+alt Неверный формат данных
+REST --> Gateway: Сообщение об ошибке Invalid data format or missing file.
+Gateway --> UI: Сообщение об ошибке Invalid data format or missing file.
+UI --> User: Сообщение об ошибке неверный формат фото.
+end
+REST -> MinIO: Загружает файл в объектное хранилище MinIO.
+MinIO --> REST:Сохраняет фото отдает URL фото.
+REST -> PostgreSQL: Имя файла, MIME-тип, размер, URL и метка времени сохраняются в таблице images.
+REST --> Gateway: Возвращает ответ с URL файла и метаданными фото.
+Gateway--> UI: Возвращает ответ с URL файла и метаданными фото.
+UI--> User: Возвращает ответ с успешной загрузкой фото
+alt Удаление фото
+User -> UI: Пользователь нажимает кнопку Cancel download
+UI -> Gateway: Пользователь нажимает кнопку Cancel download
+Gateway -> REST: Удалить загруженное фото DELETE /images/{imageId}
+REST -> PostgreSQL: Проверяет наличие фото по imageId в таблице images
+REST -> MinIO: Удаляет файл из MinIO.
+REST -> PostgreSQL: Запись о фото из базы данных PostgreSQL.
+deactivate PostgreSQL
+deactivate MinIO
+REST -> Gateway: Возвращает подтверждение удаления Image successfully deleted
+Gateway -> UI: Возвращает подтверждение удаления
+UI -> User: Загрузка отменена
+end
+deactivate User
+deactivate UI
+deactivate Gateway
+deactivate REST
+end group
+@enduml

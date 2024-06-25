@@ -1,0 +1,29 @@
+@startuml
+actor "Пользователь" as User
+box "CatsPost"
+    participant "UI" as UI
+end box
+participant "API-Gateway" as Gateway
+box "Catsaimages Service"
+participant "REST API" as REST
+end box
+
+group Use Case 1: Получение списка изображений пользователя
+activate User
+activate UI
+User <-- UI: Приложение отображает экран личного профиля
+activate Gateway
+activate REST
+User -> UI: Пользователь отправляет запрос на список своих изображений.
+UI -> Gateway: Пользователь отправляет запрос на список своих изображений.
+Gateway -> REST: Отправить данные на проверку GET /images/user
+REST -> REST: Извлекает метаданные изображений из таблицы images для конкретного пользователя (user_id из JWT).
+REST --> Gateway: Возвращает ответ с идентификатором изображения, URL изображения, время загрузки
+Gateway--> UI: Возвращает ответ с идентификатором изображения, URL изображения, время загрузки
+UI--> User: Возвращает ответ с фото пользователя
+deactivate User
+deactivate UI
+deactivate Gateway
+deactivate REST
+end group
+@enduml
