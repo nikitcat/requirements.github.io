@@ -1,0 +1,52 @@
+@startuml
+actor "Пользователь" as User
+box "CatsPost"
+    participant "UI" as UI
+end box
+participant "API-Gateway" as Gateway
+box "Catsauth Service"
+participant "REST API" as REST
+end box
+
+
+
+group Use Case 1: Авторизация пользователя
+activate User
+activate UI
+User <-- UI: Система отображает экран входа
+User <- User: Пользователь вводит Nickname, email, password
+activate Gateway
+activate REST
+User -> UI: Пользователь нажимает кнопку "Continue"
+UI -> Gateway: Пользователь нажимает кнопку "Continue"
+Gateway -> REST: Отправить данные на проверку POST /login
+REST -> REST: Валидация данных
+alt Неверные данные
+
+REST -> REST: Проверка на уникальность
+REST --> Gateway: Ответ с ошибкой Invalid email or password.
+Gateway --> UI: Ответ с ошибкой
+UI --> User: Показать данные об ошибке
+alt Истекший JWT token
+REST --> Gateway: Ответ с ошибкой Invalid or expired refresh token.
+Gateway --> UI: Ответ с ошибкой
+UI --> User: Что-то пошло не так
+User -> UI: Обновляет страницу
+UI -> Gateway: Обновляет страницу
+Gateway -> REST: Обновить JWT токен POST /refresh
+REST -> REST: Проверяет refresh_token, Генерирует новый JWT токен, Обновляет запись refresh_token в таблице tokens.
+REST --> Gateway: Возвращает новый JWT токен и обновленный refresh_token
+Gateway --> UI: Возвращает результат пользователю.
+UI--> User: Доступ восстановлен.
+end
+end
+REST -> REST: Генерирует JWT токен и refresh_token Сохраняет refresh_token в таблице tokens 
+REST -> Gateway: Возвращает JWT токен и refresh_token
+Gateway -> UI: Ответ об успешной авторизации пользователя
+UI -> User: Ответ об успешной авторизации пользователя
+deactivate User
+deactivate UI
+deactivate Gateway
+deactivate REST
+end group
+@enduml

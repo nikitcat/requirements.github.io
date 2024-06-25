@@ -4,7 +4,7 @@
 
 - *Название метода:* Обновление JWT токена
 
-- *URL и Endpoint:* POST https://cats-mobile.ru/user/refresh
+- *URL и Endpoint:* POST https://cats-mobile.ru/auth/refresh
 
 *2. Общее описание метода:*
 
@@ -47,7 +47,7 @@
 
 - *Метод:* POST
 
-- *URL:* https://cats-mobile.ru/user/refresh
+- *URL:* https://cats-mobile.ru/auth/refresh
 
 - *query-параметры:* нет
 
@@ -88,7 +88,7 @@
 
 *Таблицы маппинга данных JSON и БД*
 
-*6. Входные параметры POST https://cats-mobile.ru/user/refresh*
+*6. Входные параметры POST https://cats-mobile.ru/auth/refresh*
 |===
 |*Название параметра на русском*|*Название параметра в JSON*|*Тип данных в JSON*|*Название параметра в БД*|*Тип данных в БД*|*Описание и алгоритм обработки данных*
 
@@ -100,7 +100,7 @@
 |Поиск и проверка refresh_token
 |===
 
-*6.1 Выходные параметры POST https://cats-mobile.ru/user/refresh*
+*6.1 Выходные параметры POST https://cats-mobile.ru/auth/refresh*
 
 |===
 |*Название параметра на русском*|*Название параметра в JSON*|*Тип данных в JSON*|*Название параметра в БД*|*Тип данных в БД*|*Описание и алгоритм обработки данных*

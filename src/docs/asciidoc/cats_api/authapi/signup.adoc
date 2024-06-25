@@ -4,7 +4,7 @@
 
 - *Название метода:* Регистрация нового пользователя
 
-- *URL и Endpoint:* POST https://cats-mobile.ru/user/signup
+- *URL и Endpoint:* POST https://cats-auth.ru/auth/signup
 
 *2. Общее описание метода:*
 
@@ -44,7 +44,7 @@
 
 - *Метод:* POST
 
-- *URL:* https://cats-mobile.ru/api/v1/user/register
+- *URL:* https://cats-auth.ru/auth/signup
 
 - *query-параметры:* нет
 
@@ -95,7 +95,7 @@
 
 *Таблицы маппинга данных JSON и БД*
 
-*6. Входные параметры POST https://cats-mobile.ru/user/signup*
+*6. Входные параметры POST https://cats-auth.ru/auth/signup*
 
 |===
 |*Название параметра на русском*|*Название параметра в JSON*|*Тип данных в JSON*|*Название параметра в БД*|*Тип данных в БД*|*Описание и алгоритм обработки данных*
@@ -122,7 +122,7 @@
 |Хэширование и сохранение хэша в формате MD5+соль
 |===
 
-*6.1 Выходные параметры POST https://cats-mobile.ru/user/signup*
+*6.1 Выходные параметры POST https://cats-auth.ru/auth/signup*
 
 |===
 |*Название параметра на русском*|*Название параметра в JSON*|*Тип данных в JSON*|*Название параметра в БД*|*Тип данных в БД*|*Описание и алгоритм обработки данных*

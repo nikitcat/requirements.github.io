@@ -1,5 +1,5 @@
 @startuml
-actor "Владелец кошек" as User
+actor "Пользователь" as User
 box "CatsPost"
     participant "UI" as UI
 end box
@@ -13,23 +13,23 @@ end box
 group Use Case 1: Регистрация нового пользователя
 activate User
 activate UI
-User -> UI: Владелец кошек нажимает кнопку "Зарегистрироваться"
+User -> UI: Пользователь нажимает кнопку "Зарегистрироваться"
 User <-- UI: Система отображает форму регистрации
-User -> User: Владелец кошек вводит Nickname, email, password
+User -> User: Пользователь вводит Nickname, email, password
 activate Gateway
 activate REST
-User -> UI: Владелец кошек нажимает кнопку "Continue"
-UI -> Gateway: Владелец кошек нажимает кнопку "Continue"
-Gateway -> REST: Отправить данные на проверку
+User -> UI: Пользователь нажимает кнопку "Continue"
+UI -> Gateway: Пользователь нажимает кнопку "Continue"
+Gateway -> REST: Отправить данные на проверку POST auth/signup
 REST -> REST: Валидация данных
 alt Неверные данные
 REST -> REST: Проверка на уникальность
-REST --> Gateway: Ответ с ошибкой
-Gateway --> UI: Ответ с ошибкой
+REST --> Gateway: Ответ с ошибкой User with this email already exists.
+Gateway --> UI: Ответ с ошибкой 
 UI --> User: Показать данные об ошибке
 end
 REST -> REST: Сохранить новую учетную запись
-REST -> Gateway: Ответ об успешном сохранении пользователя
+REST -> Gateway: Ответ об успешном сохранении пользователя, возвращает JWT токен и refresh_token
 Gateway -> UI: Ответ об успешном сохранении пользователя
 UI -> User: Ответ об успешном сохранении пользователя
 deactivate User

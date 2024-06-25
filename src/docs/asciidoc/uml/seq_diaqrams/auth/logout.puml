@@ -1,0 +1,37 @@
+@startuml
+actor "Пользователь" as User
+box "CatsPost"
+    participant "UI" as UI
+end box
+participant "API-Gateway" as Gateway
+box "Catsauth Service"
+participant "REST API" as REST
+end box
+
+
+
+group Use Case 1: Выход пользователя
+activate User
+activate UI
+User <-- UI: Система отображает экран выхода
+activate Gateway
+activate REST
+User -> UI: Пользователь нажимает кнопку выйти
+UI -> Gateway: Пользователь нажимает кнопку выйти
+Gateway -> REST: Отправить данные на проверку POST /logout
+REST -> REST: Валидация данных
+alt Неправильный или отсутствующий refresh_token.
+REST --> Gateway: Ответ с ошибкой Invalid or missing refresh token.
+Gateway -> UI: Возвращает ответ с ошибкой
+UI-> User: Возвращает ответ с ошибкой
+end
+REST -> REST: Удаляет запись refresh_token из таблицы tokens
+REST --> Gateway : Возвращает успешное завершение операции User successfully logged out.
+Gateway -> UI: Возвращает успешное завершение операции
+UI -> User: Ответ об успешном выходе из приложения
+deactivate User
+deactivate UI
+deactivate Gateway
+deactivate REST
+end group
+@enduml

@@ -1,0 +1,17 @@
+*Регистрация нового пользователя*
+[plantuml, signup, png]
+----
+include::seq_diaqrams/auth/signup.puml[]
+----
+
+*Авторизация пользователя и рефреш токена*
+[plantuml, login, png]
+----
+include::seq_diaqrams/auth/login.puml[]
+----
+
+*Выход пользователя*
+[plantuml, logout, png]
+----
+include::seq_diaqrams/auth/logout.puml[]
+----

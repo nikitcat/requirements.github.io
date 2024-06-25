@@ -1,0 +1,11 @@
+*Загрузка фото пользователя* *Удаление фото по идентификатору*
+[plantuml, upload, png]
+----
+include::seq_diaqrams/cimages/upload.puml[]
+----
+
+*Получение списка изображений* *Получение фото по идентификатору*
+[plantuml, images, png]
+----
+include::seq_diaqrams/cimages/images.puml[]
+----
