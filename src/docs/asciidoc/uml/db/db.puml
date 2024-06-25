@@ -1,0 +1,69 @@
+@startuml
+
+database "Auth" {
+  class "users" {
+    user_id [PK]
+    user_name
+    email
+    password_hash
+    avatar_url
+    created_at
+    updated_at
+  }
+
+  class "tokens" {
+    token_id [PK]
+    user_id [FK]
+    refresh_token
+    expires_at
+    created_at
+    updated_at
+  }
+
+  users ||--o{ tokens : has
+}
+
+database "Images" {
+  class "images" {
+    image_id [PK]
+    user_id [FK]
+    filename
+    mime_type
+    size_bytes
+    uploaded_at
+    image_url
+  }
+
+  users ||--o{ images : has
+}
+
+database "Feeds" {
+  class "posts" {
+    post_id [PK]
+    user_id [FK]
+    image_url
+    tag_list
+    created_at
+    updated_at
+  }
+
+  class "post_likes" {
+    like_id [PK]
+    post_id [FK]
+    user_id [FK]
+    liked_at
+  }
+
+  class "post_comments" {
+    comment_id [PK]
+    post_id [FK]
+    user_id [FK]
+    comment
+    commented_at
+  }
+
+  posts ||--o{ post_likes : has
+  posts ||--o{ post_comments : has
+  users ||--o{ posts : has
+}
+@enduml
