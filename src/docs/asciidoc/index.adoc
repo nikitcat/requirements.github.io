@@ -1,4 +1,4 @@
-= Мобильное приложению Catspost 
+= Мобильное приложению Котограмм 
 :toc: left
 :toc-title: Оглавление
 
@@ -530,7 +530,7 @@ include::uml/use_case.puml[]
 
 ==== 1.3 Диаграмма компонентов
 
-*Компонент CatsPost Mobile:* клиентское мобильное приложение OC Android.
+*Компонент Котограмм Mobile:* клиентское мобильное приложение OC Android.
 
 *Компонент API Gateway:* предоставляет единую точку входа для клиентского приложения.
 
@@ -582,9 +582,9 @@ include::uml/db/db.puml[]
 
 '''
 
-- Метод: Добавление комментария xref:cats_api/feedsapi/comments/addcomments.adoc[POST /posts/{postId}/comment]
+- Метод: Добавление комментария xref:cats_api/feedsapi/comments/addcomment.adoc[POST /posts/{postId}/comment]
 - Метод: Получение комментариев поста xref:cats_api/feedsapi/comments/getcomments.adoc[GET /posts/{postId}/comment]
-- Метод: Редактирование комментария xref:cats_api/feedsapi/comments/patchcomments.adoc[PATCH /posts/{postId}/comment/{commentId}]
+- Метод: Редактирование комментария xref:cats_api/feedsapi/comments/patchcomment.adoc[PATCH /posts/{postId}/comment/{commentId}]
 - Метод: Удаление комментария xref:cats_api/feedsapi/comments/deletecomment.adoc[DELETE /posts/{postId}/comment/{commentId}]
 
 '''
@@ -619,7 +619,7 @@ include::uml/ui.puml[]
 |Пользователь нажал кнопку регистрация
 |Отображается под фото экрана входа используется для регистрации нового пользователя
 |Содержит для поля ввода Your email, Nickname, Password и кнопку Continue
-|Поле ввода Your email должен соответствовать стандартному формату адреса электронной почты, например, catspost@gmail.com количество символов в электронной почте, до 255 символов
+|Поле ввода Your email должен соответствовать стандартному формату адреса электронной почты, например, kotogramm@gmail.com количество символов в электронной почте, до 255 символов
 
 Поле ввода Password
 Пароль должен содержать не менее 8 символов, но не более 128, обязательно должен иметь буквы в верхнем и нижнем регистре цифры и специальные символы

@@ -1,6 +1,6 @@
 @startuml
 actor "Пользователь" as User
-box "CatsPost"
+box "Котограмм"
     participant "UI" as UI
 end box
 participant "API-Gateway" as Gateway
