@@ -1,6 +1,6 @@
 @startuml
 
-component "Пользователь" as User
+actor "Пользователь" as User
 component "Catspost Mobile" as CatspostApp
 component "API Gateway" as APIGateway
 component "Cats Auth" as CatsAuth
