@@ -1,65 +1,65 @@
 @startuml
 
 database "Auth" {
-  class "users" {
-    user_id [PK]
-    user_name
-    email
-    password_hash
-    avatar_url
-    created_at
-    updated_at
+  entity "users" {
+    user_id [PK] : **(uuid, UNIQUE, NOT NULL)**
+    user_name : **(varcahr(64), NOT NULL)**
+    email **(varcahr(256), NOT NULL)**
+    password_hash **((CHAR(128), NOT NULL)**
+    avatar_url **(varcahr(255))**
+    created_at **(timestamp)**
+    updated_at **(timestamp)**
   }
 
-  class "tokens" {
-    token_id [PK]
-    user_id [FK]
-    refresh_token
-    expires_at
-    created_at
-    updated_at
+  entity "tokens" {
+    token_id [PK] **(uuid, UNIQUE, NOT NULL)**
+    user_id [FK] **(uuid, NOT NULL)**
+    refresh_token **(varchar(255), NOT NULL)**
+    expires_at **(timestamp)**
+    created_at **(timestamp)**
+    updated_at **(timestamp)**
   }
 
   users ||--o{ tokens : has
 }
 
 database "Images" {
-  class "images" {
-    image_id [PK]
-    user_id [FK]
-    filename
-    mime_type
-    size_bytes
-    uploaded_at
-    image_url
+  entity "images" {
+    image_id [PK] **(uuid, UNIQUE, NOT NULL)**
+    user_id [FK] **(uuid, NOT NULL)**
+    filename **(varcahr(255))**
+    mime_type **(varcahr(100))**
+    size_bytes **(bigint)**
+    uploaded_at **(timestamp)**
+    image_url **(varcahr(255))**
   }
 
   users ||--o{ images : has
 }
 
 database "Feeds" {
-  class "posts" {
-    post_id [PK]
-    user_id [FK]
-    image_url
-    tag_list
-    created_at
-    updated_at
+  entity "posts" {
+    post_id [PK] **(uuid, UNIQUE, NOT NULL)**
+    user_id [FK] **(uuid, NOT NULL)**
+    image_url **(varcahr(255))**
+    tag_list **(text [])**
+    created_at **(timestamp)**
+    updated_at **(timestamp)**
   }
 
-  class "post_likes" {
-    like_id [PK]
-    post_id [FK]
-    user_id [FK]
-    liked_at
+  entity "post_likes" {
+    like_id [PK] **(uuid, UNIQUE, NOT NULL)**
+    post_id [FK] **(uuid, NOT NULL)**
+    user_id [FK] **(uuid, NOT NULL)**
+    liked_at **(timestamp)**
   }
 
-  class "post_comments" {
-    comment_id [PK]
-    post_id [FK]
-    user_id [FK]
-    comment
-    commented_at
+  entity "post_comments" {
+    comment_id [PK] **(uuid, UNIQUE, NOT NULL)**
+    post_id [FK] **(uuid, NOT NULL)**
+    user_id [FK] **(uuid, NOT NULL)**
+    comment **(text, NOT NULL)**
+    commented_at **(timestamp)**
   }
 
   posts ||--o{ post_likes : has
