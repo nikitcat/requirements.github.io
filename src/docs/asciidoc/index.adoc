@@ -603,9 +603,10 @@ include::uml/db/db.puml[]
 
 - Белым отмечены шаги пользователя.
 - Зелёным работа клиентского приложения.
+
 [plantuml, ui, png]
 ----
-include::uml/seq_diaqrams/uinav/ui.puml[]
+include::uml/ui.puml[]
 ----
 
 === 2.UI логика экранов
