@@ -1,7 +1,7 @@
 @startuml
 skinparam packageStyle rectangle
 actor "Владелец питомцев"
-rectangle CatsPost {
+rectangle "Котограмм" {
 "Владелец питомцев" --> (Вход в приложение)
 (Вход в личный профиль) ....> (Аутентификация) : include
 (Вход в личный профиль) ...> (Просмотр опубликованых фото) :include

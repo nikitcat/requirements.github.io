@@ -1,5 +1,4 @@
 @startuml
-
 database "Auth" {
   entity "users" {
     user_id [PK] : **(uuid, UNIQUE, NOT NULL)**
@@ -34,7 +33,6 @@ database "Images" {
     image_url **(varcahr(255))**
   }
 
-  users ||--o{ images : has
 }
 
 database "Feeds" {
@@ -64,6 +62,5 @@ database "Feeds" {
 
   posts ||--o{ post_likes : has
   posts ||--o{ post_comments : has
-  users ||--o{ posts : has
 }
 @enduml
