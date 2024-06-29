@@ -15,7 +15,7 @@ jobs:
            PLANTUML_ENCODING="deflate"
            asciidoctor -r asciidoctor-plantuml -D build/site -R src/docs/asciidoc **/*.adoc
     - name: Publish to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-rq-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: build/site
