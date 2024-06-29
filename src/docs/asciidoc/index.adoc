@@ -3,7 +3,7 @@
 :toc-title: Оглавление
 
 |===
-|*Ссылка на мет в Figma*
+|*Ссылка на макет в Figma*
 
 |https://www.figma.com/design/GEyqW35304GqHDfHaUfuly/Cats-and-Phone[https://www.figma.com/]
 |===
